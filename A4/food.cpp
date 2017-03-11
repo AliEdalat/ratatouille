@@ -1,5 +1,6 @@
 #include "food.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 Food::Food(string code,string name,string type,string cost){

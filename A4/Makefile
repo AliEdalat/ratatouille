@@ -1,13 +1,13 @@
 all: Main Food Restaurant Customer Order
-	g++ main.o food.o restaurant.o customer.o order.o
-	./a.out
+	g++ -std=c++98 main.o food.o restaurant.o customer.o order.o
+	./a.out<in.txt>w.txt
 Main:
-	g++ -c main.cpp
+	g++ -std=c++98 -c main.cpp
 Food:
-	g++ -c food.cpp
+	g++ -std=c++98 -c food.cpp
 Restaurant:
-	g++ -c restaurant.cpp
+	g++ -std=c++98 -c restaurant.cpp
 Order:
-	g++ -c order.cpp
+	g++ -std=c++98 -c order.cpp
 Customer:
-	g++ -c customer.cpp
+	g++ -std=c++98 -c customer.cpp

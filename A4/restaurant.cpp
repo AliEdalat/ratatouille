@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "restaurant.h"
+#include "food.h"
 
 using namespace std;
 Restaurant::Restaurant(string name,string phone,string location){
@@ -28,4 +30,17 @@ void Restaurant::show_menu(){
 }
 vector<Food*> Restaurant::get_foods(){
 	return foods;
+}
+void Restaurant::show_foods_list(){
+	for (int j = 0; j < foods.size(); ++j)
+	{
+		cout<<foods[j]->get_code()<<' '<<foods[j]->get_name()<<' '<<foods[j]->get_type()<<' '<<foods[j]->get_cost()<<' '<< this->get_name()<<' '<<this->get_location()<<endl;
+	}
+	return;
+}
+bool compare2(Food* food1,Food* food2){
+	return food1->get_code()<food2->get_code();
+}
+void Restaurant::sort_foods_in_menu(){
+	sort(foods.begin(),foods.end(),compare2);
 }

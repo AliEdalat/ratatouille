@@ -15,7 +15,9 @@ public:
 	std::string get_location(){return restaurant_location;}
 	void add_food(Food* food);
 	std::vector<Food*> get_foods();
+	void show_foods_list();
 	void show_menu();
+	void sort_foods_in_menu();
 	~Restaurant();
 private:
 	std::string restaurant_name;

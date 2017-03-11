@@ -47,5 +47,3 @@ PerPerook,88288010,Gisha
 88288010000,HotDog,European,7000
 88288010001,Gheime,Iranian,12000
 88288010002,Pizza,European,10000
-
-

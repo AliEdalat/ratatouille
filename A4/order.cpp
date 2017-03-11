@@ -20,6 +20,7 @@ void Order::add_food(food_in_order* food){
 	foods.push_back(food);
 }
 void Order::calculate_cost(){
+	order_cost=0;
 	for (int i = 0; i < foods.size(); ++i)
 	{
 		int food_cost=(foods[i]->food)->get_cost();

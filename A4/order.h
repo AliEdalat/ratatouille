@@ -31,7 +31,7 @@ public:
 	~Order();
 private:
 	Customer* order_owner;
-	int order_cost=0;
+	int order_cost;
 	int delivery_cost;
 	std::vector<food_in_order*> foods;
 	

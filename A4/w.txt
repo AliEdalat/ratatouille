@@ -1,108 +1,6 @@
-Tahdig,22038055,Parkvey
-22038055001,Kabab,Iranian,10000
-22038055002,Koko,Iranian,8000
-
-PerPerook,26203727,Parkvey
-26203727001,Gheime,Iranian,12000
-26203727002,Pizza,European,10000
-
-PerPerook,22599553,Pasdaran
-22599553015,Hamburger,European,6000
-
-Tahdig,22038055,Parkvey
-22038055001,Kabab,Iranian,10000
-22038055002,Koko,Iranian,8000
-
-Naayeb,22078463,SaadatAbad
-22078463012,Ghorme,Iranian,14000
-22078463013,Gheime,Iranian,15000
-
-PerPerook,22093205,SaadatAbad
-22093205000,HotDog,European,8000
-22093205001,Gheime,Iranian,13000
-22093205002,Pizza,European,11000
-
-PerPerook,22599553,Pasdaran
-22599553015,Hamburger,European,6000
-
-PerPerook,26203727,Parkvey
-26203727001,Gheime,Iranian,12000
-26203727002,Pizza,European,10000
-
-Bistro,88054638,Vanak
-88054638003,Sushi,Eastern,20000
-
-Boof,88242466,Gisha
-88242466008,Falafel,Eastern,8000
-88242466034,Hamburger,European,6000
-
-Shila,88255702,Gisha
-88255702011,sandwich,European,6500
-88255702020,Pizza,European,12000
-
-Papyon,88281466,Gisha
-88281466009,Falafel,Eastern,8000
-
-PerPerook,88288010,Gisha
-88288010000,HotDog,European,7000
-88288010001,Gheime,Iranian,12000
-88288010002,Pizza,European,10000
-0
-Tahdig 22038055 Parkvey
-22038055001 Kabab Iranian 10000
-22038055002 Koko Iranian 8000
-1
-PerPerook 26203727 Parkvey
-26203727001 Gheime Iranian 12000
-26203727002 Pizza European 10000
-2
-PerPerook 22599553 Pasdaran
-22599553015 Hamburger European 6000
-3
-Tahdig 22038055 Parkvey
-22038055001 Kabab Iranian 10000
-22038055002 Koko Iranian 8000
-4
-Naayeb 22078463 SaadatAbad
-22078463012 Ghorme Iranian 14000
-22078463013 Gheime Iranian 15000
-5
-PerPerook 22093205 SaadatAbad
-22093205000 HotDog European 8000
-22093205001 Gheime Iranian 13000
-22093205002 Pizza European 11000
-6
-PerPerook 22599553 Pasdaran
-22599553015 Hamburger European 6000
-7
-PerPerook 26203727 Parkvey
-26203727001 Gheime Iranian 12000
-26203727002 Pizza European 10000
-8
-Bistro 88054638 Vanak
-88054638003 Sushi Eastern 20000
-9
-Boof 88242466 Gisha
-88242466008 Falafel Eastern 8000
-88242466034 Hamburger European 6000
-10
-Shila 88255702 Gisha
-88255702011 sandwich European 6500
-88255702020 Pizza European 12000
-11
-Papyon 88281466 Gisha
-88281466009 Falafel Eastern 8000
-12
-PerPerook 88288010 Gisha
 88288010000 HotDog European 7000
 88288010001 Gheime Iranian 12000
 88288010002 Pizza European 10000
-88288010000 HotDog European 7000
-88288010001 Gheime Iranian 12000
-88288010002 Pizza European 10000
-Tahdig Parkvey 22038055
-PerPerook Parkvey 26203727
-PerPerook Pasdaran 22599553
 Tahdig Parkvey 22038055
 Naayeb SaadatAbad 22078463
 PerPerook SaadatAbad 22093205
@@ -125,25 +23,28 @@ PerPerook Gisha 88288010
 88288010000 HotDog European 7000 PerPerook Gisha
 88288010001 Gheime Iranian 12000 PerPerook Gisha
 88288010002 Pizza European 10000 PerPerook Gisha
-22038055001 Kabab Iranian 10000 Tahdig Parkvey
-22038055002 Koko Iranian 8000 Tahdig Parkvey
-26203727001 Gheime Iranian 12000 PerPerook Parkvey
-22038055001 Kabab Iranian 10000 Tahdig Parkvey
-22038055002 Koko Iranian 8000 Tahdig Parkvey
-22078463012 Ghorme Iranian 14000 Naayeb SaadatAbad
-22078463013 Gheime Iranian 15000 Naayeb SaadatAbad
-22093205001 Gheime Iranian 13000 PerPerook SaadatAbad
-26203727001 Gheime Iranian 12000 PerPerook Parkvey
-88288010001 Gheime Iranian 12000 PerPerook Gisha
-Pesare Shoja 091412345678 45500
-your food code is not correct!
-Pesare Shoja 091412345678
-88255702011 sandwich European 6500 7 45500  
-delivery cost 0
-total cost 45500
-Pesare Shoja 091412345678
-88255702011 sandwich European 6500 7 45500  
+Pesare Shoja 91412345678 45500
+Pesare Shoja 91412345678 63000
+Pesare Shoja 91412345678
+88288010002 Pizza European 10000 3 30000 without pepper
+22078463021 Ghorme Iranian 14000 2 28000
+delivery cost 5000
+total cost 63000
+Pesare Shoja 91412345678
+88255702011 sandwich European 6500 7 45500
 delivery cost 0
 total cost 45500
 #
-total purchase 45500
+88288010002 Pizza European 10000 3 30000 without pepper
+22078463021 Ghorme Iranian 14000 2 28000
+delivery cost 5000
+total cost 63000
+#
+total purchase 108500
+22038055000 Kabab Iranian 10000 Tahdig Parkvey
+22038055001 Koko Iranian 8000 Tahdig Parkvey
+22078463013 Gheime Iranian 15000 Naayeb SaadatAbad
+22078463021 Ghorme Iranian 14000 Naayeb SaadatAbad
+22093205001 Gheime Iranian 13000 PerPerook SaadatAbad
+26203727001 Gheime Iranian 12000 PerPerook Parkvey
+88288010001 Gheime Iranian 12000 PerPerook Gisha
