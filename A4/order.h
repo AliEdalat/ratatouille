@@ -4,6 +4,7 @@
 #include <iostream>
 #include "customer.h"
 #include "food.h"
+#include "restaurant.h"
 #include <vector>
 
 typedef struct order_food food_in_order;
@@ -21,11 +22,11 @@ public:
 	Order(Customer* owner,std::vector<food_in_order*> _foods);
 	int get_cost(){return order_cost;}
 	int get_delivery_cost(){return delivery_cost;}
-	void set_delivery_cost(int cost){delivery_cost=cost;}
 	std::string get_owner_name(){return order_owner->get_name();}
 	std::string get_owner_phone(){return order_owner->get_phone_number();}
 	std::string get_owner_location(){return order_owner->get_location();}
 	void calculate_cost();
+	void calculate_delivery_cost(std::vector<Restaurant*> restaurants);
 	void add_food(food_in_order* food);
 	std::vector<food_in_order*> get_foods(){return foods;}
 	~Order();

@@ -29,7 +29,7 @@ void Restaurant::show_menu(){
 	}
 }
 vector<Food*> Restaurant::get_foods(){
-	return foods;
+	return foods; 
 }
 void Restaurant::show_foods_list(){
 	for (int j = 0; j < foods.size(); ++j)

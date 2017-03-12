@@ -10,9 +10,7 @@
 #include "customer.h"
 
 #define RESTAURANT_PHONE_LENGTH 8
-#define MINIMUM_PRICE 100000
-#define FREE_DELIVERY 0
-#define DELIVERY_COST 5000
+
 
 using namespace std;
 int find_restaurant_with_phone(vector<Restaurant*>& restaurants,string phone);
@@ -31,55 +29,6 @@ string show_phone_number(string phone_number){
 		result=phone_number;
 	}
 	return result;
-}
-string find_restaurant_of_food_location(Food* food,vector<Restaurant*>& restaurants){
-	string food_code=food->get_code();
-	string food_phone;
-	for (int i = 0; i < RESTAURANT_PHONE_LENGTH; ++i)
-	{
-		food_phone.push_back(food_code[i]);
-	}
-	for (int i = 0; i < restaurants.size(); ++i)
-	{
-		
-		string restaurants_phone =(restaurants[i])->get_phone();
-		cout<<restaurants_phone<<' '<<food_phone<<endl; 
-		if( restaurants_phone == food_phone){
-			return restaurants[i]->get_location();
-		}
-		
-	}
-	
-	return " ";
-}
-void calculate_delivery_cost(vector<Restaurant*>& restaurants,Order* order){
-	bool is_delivery_cost_zero=true;
-	vector<food_in_order*> foods=order->get_foods();
-	for (int i = 0; i < foods.size(); ++i)
-	{
-		string owner_location=order->get_owner_location();
-		string food_phone=(foods[i]->food)->get_code();
-		string restaurant_phone;
-		for (int i = 0; i < RESTAURANT_PHONE_LENGTH; ++i)
-		{
-			restaurant_phone.push_back(food_phone[i]);
-		}
-		int index=find_restaurant_with_phone(restaurants,restaurant_phone);
-		string restaurant_location=restaurants[index]->get_location();
-		if( owner_location.compare(restaurant_location) !=0){
-			is_delivery_cost_zero=false;
-			break;
-		}
-	}
-	if(order->get_cost() > MINIMUM_PRICE && is_delivery_cost_zero != true){
-		is_delivery_cost_zero=true;
-	}
-	if(!is_delivery_cost_zero){
-		order->set_delivery_cost(DELIVERY_COST);
-	}
-	else{
-		order->set_delivery_cost(FREE_DELIVERY);
-	}
 }
 string find_first_item_file(string& line,char character){
 	string result;
@@ -250,7 +199,7 @@ Customer* find_customer_with_phone(vector<Customer*>& customers,string customer_
 			return customers[i];
 		}
 	}
-	cout<<"I can not this phone number!"<<endl;
+	cout<<"I can not find this phone number!"<<endl;
 	return NULL;
 }
 bool find_personalization(string line){
@@ -386,9 +335,16 @@ void add_food_to_order(string temp,vector<Restaurant*>& restaurants,Order* new_o
 		string food_code=find_first_item_file(temp,' ');
 		Food* food=find_food_with_code(restaurants,food_code);
 		if (food == NULL){
-			return;
+			throw 0;
 		}
 		string food_number=find_first_item_file(temp,' ');
+		for (int i = 0; i < food_number.size(); ++i)
+		{
+			if(food_number[i] <48 || food_number[i]>57){
+				cout<<"food number is not correct!"<<endl;
+				throw -1;
+			}
+		}
 		string personalization=" ";
 		if(have_personalization){
 			personalization=temp;
@@ -410,32 +366,221 @@ void order_command(string line,vector<Restaurant*>& restaurants,vector<Customer*
 		while(getline(cin,temp)){
 			if(temp == "$"){
 				new_order->calculate_cost();
-				calculate_delivery_cost(restaurants,new_order);
+				new_order->calculate_delivery_cost(restaurants);
 				cout<<new_order->get_owner_name()<<' '<<show_phone_number(new_order->get_owner_phone())<<' '<<new_order->get_cost()+new_order->get_delivery_cost()<<endl;
 				orders.push_back(new_order);
 				break;
 			}
-			add_food_to_order(temp,restaurants,new_order);
+			try{
+				add_food_to_order(temp,restaurants,new_order);
+			}catch(int error){
+				if(error == 0){
+					cout<<"correct your food code"<<endl;
+					continue;
+				}
+			}catch(int error){
+				if(error == -1){
+					cout<<"correct your food number"<<endl;
+					continue;
+				}
+			}
 
 		}
 }
+bool valid_restaurant_number(string number){
+	for (int i = 0; i < number.size(); ++i)
+	{
+		if(i >0 && (number[i] < 48 || number[i]>57) ){
+			return false;
+		}
+		if(i == 0 && (number[i] <= 48 || number[i] > 57)){
+			return false;
+		}
+	}
+	if(number.size() == 8){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+int find_spaces(string line){
+	int spaces=0;
+	for (int i = 0; i < line.size(); ++i)
+	{
+		if(line[i] == ' '){
+			spaces++;
+		}
+	}
+	return spaces;
+}
+bool valid_menu_command(string line){
+	int spaces=find_spaces(line);
+	if(spaces == 1){
+		int found=line.find(' ');
+		string s1=line.substr(0,found);
+		string s2=line.substr(found+1);
+		if(s1 == "menu" && valid_restaurant_number(s2)){
+			return true;
+		}
+	}
+	cout<<"phone_number is not correct!"<<endl;
+	return false;
+}
+bool valid_customer_number(string number){
+	for (int i = 0; i < number.size(); ++i)
+	{
+		if(number[i] < 48 || number[i]>57){
+			return false;
+		}
+	}
+	return true;
+}
+bool valid_restaurants_command(string line){
+	int found=line.find("near");
+	if(found == -1){
+		if(line == "restaurants"){
+			return true;
+		}
+		return false;
+	}
+	else{
+		int spaces=find_spaces(line);
+		if(spaces == 2){
+			int first=line.find(' ');
+			first=line.find(' ',first+1);
+			string temp=line.substr(first+1);
+			if(valid_customer_number(temp)){
+				return true;
+			}
+			else{
+				cout<<"phone_number is not correct!"<<endl;
+				return false;
+			}
+		}
+	}
+}
+string find_third_part(string line){
+		int first=line.find(' ');
+		first=line.find(' ',first+1);
+		string temp=line.substr(first+1);
+		return temp;
+}
+bool valid_list_command(string line){
+	int spaces=find_spaces(line);
+	if(spaces == 2){
+		int find=line.find("near");
+		if(find != -1){
+			string temp=find_third_part(line);
+			if(valid_customer_number(temp)){
+				return true;
+			}
+			else{
+				cout<<"phone_number is not correct!"<<endl;
+				return false;
+			}
+		}
+		find=line.find("type");
+		if(find != -1){
+			string temp=find_third_part(line);
+			if (valid_type(temp))
+			{
+				return true;
+			}
+			else{
+				cout<<" type is not correct!"<<endl;
+				return false;
+			}
+		}
+	}
+	else{
+		return false;
+	}
+}
+bool valid_order_command(string line){
+	int spaces=find_spaces(line);
+	if(spaces == 1){
+		int found=line.find(' ');
+		string phone_number=line.substr(found+1);
+		if(valid_customer_number(phone_number)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	return false;
+}
+bool valid_bill_command(string line){
+	int spaces=find_spaces(line);
+	if (spaces == 1)
+	{
+		int found=line.find(' ');
+		string phone_number=line.substr(found+1);
+		if(valid_customer_number(phone_number)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	if(spaces == 2){
+		string phone_number=find_third_part(line);
+		if(valid_customer_number(phone_number)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	return false;
+}
 void do_command(vector<Order*>& orders,vector<Restaurant*>& restaurants,vector<Customer*>& customers,string line){
+	string temp=line;
 	string command=find_first_item_file(line,' ');
 	if(command == "menu"){
-		menu_command(line,restaurants);
+		if(valid_menu_command(temp)){
+			menu_command(line,restaurants);
+		}
+		else{
+			cout<<" menu command is not correct!"<<endl;
+		}
+		return;
 	}
 	if(command == "restaurants"){
-		restaurants_command(line,restaurants,customers);
+		if(valid_restaurants_command(temp)){
+			restaurants_command(line,restaurants,customers);
+
+		}
+		else{
+			cout<<"restaurants command is not correct!"<<endl;
+		}
+		return;
 	}
 	if(command == "list"){
-		list_command(line,restaurants,customers);
+		if(valid_list_command(temp)){
+			list_command(line,restaurants,customers);
+		}
+		else{
+			cout<<" list command is not correct!"<<endl;
+		}
+		return;
 	}
 	if(command == "order"){
-		order_command(line,restaurants,customers,orders);
+		if(valid_order_command(temp)){
+			order_command(line,restaurants,customers,orders);
+		}else{
+			cout<<"order command is not correct!"<<endl;
+		}
+		return;
 	}
 	if(command == "bill"){
-		bill_command(line,orders,customers);
+		if(valid_bill_command(temp)){
+			bill_command(line,orders,customers);
+		}else{
+			cout<<"bill command is not correct!"<<endl;
+		}
+		return;
 	}
+	cout<<"your command is not valid!"<<endl;
+	return;
 }
 int main(){
 	vector<Customer*> customers;
